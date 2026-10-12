@@ -131,6 +131,11 @@ function toRows(grid: Cell[][]): ImportRow[] {
       ALERT_WORDS.has(alert.toLowerCase()) ? "" : alert,
     ].filter(Boolean).join(" | ");
     const status = get(r, "status").text;
+    // A phone number typed into the Email column is kept as a second number, not as an email:
+    // otherwise two people sharing that number look like the same contact.
+    const rawEmail = get(r, "email").text;
+    const email = rawEmail.includes("@") ? rawEmail : "";
+    const phone = [get(r, "phone").text, email ? "" : rawEmail].filter(Boolean).join("/");
 
     out.push({
       row: headerIndex + i + 2,
@@ -140,8 +145,8 @@ function toRows(grid: Cell[][]): ImportRow[] {
       linkedin_url,
       designation: get(r, "designation").text,
       location: get(r, "location").text,
-      email: get(r, "email").text,
-      phone: get(r, "phone").text,
+      email,
+      phone,
       status: STATUS_FIXES[status.toLowerCase()] ?? status,
       owner: get(r, "owner").text,
       notes,
