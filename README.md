@@ -14,7 +14,7 @@ Internal multi-client CRM that replaces the Google Sheets calling sheet. Next.js
 A new database needs every file in `supabase/migrations/` applied in order.
 
 Deploys go to Vercel from this folder with `npx vercel deploy --prod --yes`. `vercel.json` pins the
-server to Singapore (`sin1`), the same region as the database (Supabase `ap-southeast-1`); keep the two together or every page slows down.
+server to Mumbai (`bom1`), the same region as the database (Supabase `ap-south-1`); keep the two together or every page slows down.
 
 ## First-time setup in the app
 
